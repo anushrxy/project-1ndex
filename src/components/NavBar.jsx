@@ -40,7 +40,7 @@ const Nav = () => {
 
         <ul
           className={`flex flex-col lg:flex-row items-center justify-start lg:pb-0 pb-12 absolute lg:static bg-[#1B1E1F] lg:z-auto z-[-1] left-0 w-full lg:w-auto lg:pl-0 transition-all duration-500 ease-in ${
-            open ? "top-20 lg:pt-0 pt-10 h-screen lg:h-auto" : "top-[-490px]"
+            open ? "top-20 lg:pt-0 pt-10 h-screen lg:h-auto z-[10]" : "top-[-490px]"
           }`}
         >
           {Links.map((link) => (
