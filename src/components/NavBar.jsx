@@ -11,7 +11,7 @@ const Nav = () => {
   ];
   let [open, setOpen] = useState(false);
   return (
-    <div className="shadow-md w-full top-0 left-0 relative z-[10]">
+    <div className="shadow-md w-auto top-0 left-0 relative z-[10]">
       <div className="flex items-center justify-between bg-[#1B1E1F] px-10 h-[96px] shadow-nav">
         <div className="cursor-pointer flex items-center text-2xl">
           <RiHandCoinLine alt="logo" className="h-[96px]" />
@@ -40,16 +40,18 @@ const Nav = () => {
 
         <ul
           className={`flex flex-col lg:flex-row items-center justify-start lg:pb-0 pb-12 absolute lg:static bg-[#1B1E1F] lg:z-auto z-[-1] left-0 w-full lg:w-auto lg:pl-0 transition-all duration-500 ease-in ${
-            open ? "top-20 lg:pt-0 pt-10 h-screen lg:h-auto z-[10]" : "top-[-490px]"
+            open
+              ? "top-20 lg:pt-0 pt-10 h-screen lg:h-auto z-[10]"
+              : "top-[-490px]"
           }`}
         >
           {Links.map((link) => (
-            <li key={link.name} className="lg:ml-[8px] ml-0 btn btn-ghost btn-lg">
+            <li
+              key={link.name}
+              className="lg:ml-[8px] ml-0 btn btn-ghost btn-lg"
+            >
               <div>
-                <a
-                  href={link.link}
-                  className="duration-500"
-                >
+                <a href={link.link} className="duration-500">
                   {link.name}
                 </a>
               </div>

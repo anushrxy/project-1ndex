@@ -11,7 +11,7 @@ const App = () => {
   
   const auth = useAuth();
   return (
-    <div>
+    <div className='overflow-hidden'>
       <NavBar/>
       {auth.loading ? (
         "Loading"
