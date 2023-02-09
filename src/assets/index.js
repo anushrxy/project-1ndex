@@ -1,2 +1,2 @@
-export {default as baseHero} from './baseHero.png'
-export {default as maticHero} from './maticHero.png'
+export const baseHero= "https://res.cloudinary.com/dlpvfuhpn/image/upload/v1675948287/project-1ndex/baseHero_iqydkh.png"
+export const maticHero= "https://res.cloudinary.com/dlpvfuhpn/image/upload/v1675948287/project-1ndex/maticHero_wfuxzv.png"
