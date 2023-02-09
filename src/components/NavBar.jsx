@@ -2,6 +2,7 @@ import { RiHandCoinLine } from "react-icons/ri";
 import "../App.css";
 
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
   let Links = [
@@ -12,7 +13,7 @@ const Nav = () => {
   let [open, setOpen] = useState(false);
   return (
     <div className="shadow-md w-auto top-0 left-0 relative z-[10]">
-      <div className="flex items-center justify-between bg-[#1B1E1F] px-10 h-[96px] shadow-nav">
+      <div className="flex items-center justify-between bg-neutral px-10 h-[96px] shadow-nav">
         <div className="cursor-pointer flex items-center text-2xl">
           <RiHandCoinLine alt="logo" className="h-[96px]" />
           <p className="font-bold ml-[10px]">AnyMoney</p>
@@ -39,9 +40,9 @@ const Nav = () => {
         </div>
 
         <ul
-          className={`flex flex-col lg:flex-row items-center justify-start lg:pb-0 pb-12 absolute lg:static bg-[#1B1E1F] lg:z-auto z-[-1] left-0 w-full lg:w-auto lg:pl-0 transition-all duration-500 ease-in ${
+          className={`flex flex-col lg:flex-row items-center justify-start lg:pb-0 pb-12 absolute lg:static bg-default lg:z-auto z-[-1] left-0 w-full lg:w-auto lg:pl-0 transition-all duration-500 ease-in ${
             open
-              ? "top-20 lg:pt-0 pt-10 h-screen lg:h-auto z-[10]"
+              ? "top-20 lg:pt-0 pt-10 h-screen lg:h-auto z-[10] bg-neutral"
               : "top-[-490px]"
           }`}
         >
@@ -57,7 +58,7 @@ const Nav = () => {
               </div>
             </li>
           ))}
-          <div className="btn btn-outline btn-lg lg:ml-[8px] ml-0">Sign In</div>
+          <Link to='/login' className="btn btn-accent btn-outline text-white btn-lg lg:ml-[8px] ml-0  ">Sign In</Link>
         </ul>
       </div>
     </div>
