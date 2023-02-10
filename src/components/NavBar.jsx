@@ -52,9 +52,9 @@ const Nav = () => {
               className="lg:ml-[8px] ml-0 btn btn-ghost btn-lg"
             >
               <div>
-                <a href={link.link} className="duration-500">
+                <Link to={link.link} className="duration-500">
                   {link.name}
-                </a>
+                </Link>
               </div>
             </li>
           ))}

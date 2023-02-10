@@ -11,7 +11,7 @@ const auth = new AuthProvider(`${appAddress}`, {
   network: 'testnet', 
   position: 'right', 
   theme: 'dark', 
-  alwaysVisible: true, 
+  alwaysVisible: false, 
   chainConfig: {
     chainId: CHAIN.POLYGON_MUMBAI_TESTNET, 
     rpcUrl: 'https://fragrant-greatest-sky.matic-testnet.discover.quiknode.pro/51a324530a248242144de9b79fc28e6f2272e30d/', 
