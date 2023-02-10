@@ -18,11 +18,6 @@ const auth = new AuthProvider(`${appAddress}`, {
   },
 })
 
-try {
-  await auth.init()
-} catch (e) {
-  console.log(e);
-}
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
