@@ -37,7 +37,7 @@ The project should now be running at `http://localhost:3000.`
 
 ## Built With
 - React - A JavaScript library for building user interfaces
-- Web3.js - A collection of libraries for interacting with Ethereum
+- Ethers.js - A collection of libraries for interacting with Ethereum
 - EthereumJS - Ethereum JavaScript API for node.js and browsers
 ## Contributing
 Contributions are welcome! Please open a pull request with your changes.
