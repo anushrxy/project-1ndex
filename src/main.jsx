@@ -6,7 +6,7 @@ import { AuthProvider } from "@arcana/auth";
 import { ProvideAuth } from "@arcana/auth-react";
 import { BrowserRouter } from 'react-router-dom';
 
-const provider = new AuthProvider(`aed154c1721d2970239f33c6045f27ba51b3ad6c`)
+const provider = new AuthProvider(`1b49478f247f0afdecf17a0f3f1ee55ad3053cf0`)
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
