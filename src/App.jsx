@@ -1,5 +1,4 @@
 import React from 'react'
-import { Auth, useAuth } from "@arcana/auth-react";
 import NavBar from "../src/components/NavBar"
 import { useNavigate } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
