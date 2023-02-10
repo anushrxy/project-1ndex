@@ -21,7 +21,7 @@ const Login = () => {
                 <p className='text-5xl btn btn-outline btn-accent rounded-lg py-5 my-5 w-fit block h-fit mx-auto '>Logged In</p>
             ) : (
                 <div>
-                    <Auth externalWallet={true} theme={"dark"} onLogin={onLogin} />
+                    <Auth externalWallet={false} loginWithSocial={'google'} theme={"dark"} onLogin={onLogin} />
                 </div>
             )}
         </div>
