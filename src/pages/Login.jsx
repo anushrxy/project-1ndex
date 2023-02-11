@@ -20,18 +20,24 @@ const Login = () => {
   const[count,setCount] = useState(0)
   async function signTxn() {
     try{
-        
-        const arcanaProvider = await auth.loginWithSocial('google')
+        console.log("Trying...")
+        console.log(await auth.isLoggedIn)
+        const arcanaProvider = await auth.connect
+        arcanaProvider ? console.log("Arcana Provider") : console.log("X Arcana Provider");
         const provider = new ethers.providers.Web3Provider(arcanaProvider)
+        provider ? console.log("Provider") : console.log("X Provider")
+        // const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
-        const appAddress = "0xde2F83d99A94194B19FdFCECF0264A238a9e4685";
+        !signer ? console.log("X Signer") : console.log("Signer")
+        const appAddress = "0xCf39211D66F4fc8c52C45831FfB2c669e0Cc5c68";
         const contract = new ethers.Contract(appAddress,abi,signer);
-        contract.addName(`arcanawallet ${count}`);
+        await contract.addName(`arcanawallet ${count}`);
         setCount(count+1);
+        
         
     }
     catch(e) {
-        console.log(e);
+        console.error(e)
     }
 
   }
@@ -47,7 +53,7 @@ const Login = () => {
           <p className="text-5xl btn btn-outline btn-accent rounded-lg py-5 my-5 w-fit block h-fit mx-auto ">
             Logged In
           </p>
-          <button className="btn mx-auto" onClick={signTxn}>
+          <button className="btn btn-outline btn-accent rounded-lg py-5 my-5 w-fit block h-fit mx-auto " onClick={signTxn}>
             Sign Txn
           </button>
         </>
