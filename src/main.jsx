@@ -18,7 +18,14 @@ const auth = new AuthProvider(`${appAddress}`, {
     rpcUrl: 'https://polygon-mumbai.g.alchemy.com/v2/Ifo0nkR33bwWSq-EsiCaY0V-MyRtqcM8',
     },
 })
- await auth.init();
+
+useEffect(()=>{
+  {async function arcanaInit() {
+  await auth.init();
+}
+    
+    arcanaInit();}
+},[])
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(

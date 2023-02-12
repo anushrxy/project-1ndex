@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Auth, useAuth } from "@arcana/auth-react";
-import { useNavigate } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import { abi } from "../contract";
 import { ethers } from "ethers";
 

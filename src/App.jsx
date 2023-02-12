@@ -22,11 +22,11 @@ const App = () => {
 
 }
 
-useEffect(()=>{
-  exec().then((data)=>{
-    console.log(data)
-  })
-},[])
+// useEffect(()=>{
+//   exec().then((data)=>{
+//     console.log(data)
+//   })
+// },[])
   return (
     <div className='overflow-hidden'>
       <NavBar/>
