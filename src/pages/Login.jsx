@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Auth, useAuth } from "@arcana/auth-react";
-import { useNavigate } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import { abi } from "../assets/abi";
 import { ethers } from "ethers";
 // import { ArcanaProvider } from "@arcana/auth/types/provider";
@@ -8,8 +8,7 @@ import { ethers } from "ethers";
 const Login = () => {
   const onLogin = () => {
     console.log("logged in");
-    const navigate = useNavigate();
-    navigate("/");
+    return redirect("/");
   };
 
   
