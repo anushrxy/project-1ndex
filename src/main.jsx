@@ -1,4 +1,4 @@
-import React ,{useEffect} from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
@@ -19,13 +19,16 @@ const auth = new AuthProvider(`${appAddress}`, {
     },
 })
 
-useEffect(()=>{
-  {async function arcanaInit() {
-  await auth.init();
-}
+auth.init();
+
+
+// useEffect(()=>{
+//   {async function arcanaInit() {
+//   await auth.init();
+// }
     
-    arcanaInit();}
-},[])
+//     arcanaInit();}
+// },[])
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
