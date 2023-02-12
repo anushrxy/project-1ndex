@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Auth, useAuth } from "@arcana/auth-react";
 import { redirect } from "react-router-dom";
-import { abi } from "../assets/abi";
+import { abi } from "../contract";
 import { ethers } from "ethers";
+
 
 const Login = () => {
   const onLogin = () => {
@@ -17,26 +18,37 @@ const Login = () => {
 
   const[count,setCount] = useState(0)
   async function signTxn() {
-    try{
-        console.log("Trying...")
-        console.log(await auth.isLoggedIn)
-        const arcanaProvider = await auth.connect
-        arcanaProvider ? console.log("Arcana Provider") : console.log("X Arcana Provider");
+    
+        // console.log("Trying...")
+        console.log(auth.isLoggedIn)
+        // const arcanaProvider = await auth.connect
+        // console.log(arcanaProvider)
+        // arcanaProvider ? console.log("Arcana Provider") : console.log("X Arcana Provider");
+        // const provider = new ethers.providers.Web3Provider(arcanaProvider)
+        // provider ? console.log("Provider") : console.log("X Provider")
+        // // const provider = new ethers.providers.Web3Provider(window.ethereum);
+        // const signer = await provider.getSigner();
+        // !signer ? console.log("X Signer") : console.log("Signer")
+        // console.log(abi)
+        // console.log(signer)
+        // setCount(count+1);
+        //await auth.init()
+        const arcanaProvider = await auth.connect();
+
         const provider = new ethers.providers.Web3Provider(arcanaProvider)
-        provider ? console.log("Provider") : console.log("X Provider")
-        // const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-        !signer ? console.log("X Signer") : console.log("Signer")
-        const appAddress = "0xCf39211D66F4fc8c52C45831FfB2c669e0Cc5c68";
+
+         const signer = provider.getSigner()
+
+        const appAddress = "0x64dFCB285194A889d5B163443A74431F2E034CB3" ;
         const contract = new ethers.Contract(appAddress,abi,signer);
-        await contract.addName(`arcanawallet ${count}`);
-        setCount(count+1);
-        
-        
-    }
-    catch(e) {
-        console.error(e)
-    }
+        const res =await contract.addName(`arcanawallet${count}`);
+        console.log(res);
+        console.log("dsdsd")
+
+       
+        // const provider2 = new ethers.providers.Web3Provider(window.ethereum)
+
+// MetaMask requires requesting permission to connect users accounts
 
   }
 
