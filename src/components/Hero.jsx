@@ -1,0 +1,33 @@
+import React from "react";
+import { baseHero, maticHero } from "../assets";
+import Button from './shared/Button'
+
+const Hero = () => {
+  return (
+    <div className="flex h-screen items-start">
+      <div className="w-full sm:w-[50vw] my-auto">
+        <div className="text-[30px] sm:text-[5vw] font-bold leading-tight sm:text-start text-center px-[32px]">
+          Lorem Ipsum with AnyBunny
+        </div>
+        <div className="text-secondary text-base sm:text-2xl font-semibold sm:w-[50vw] w-full sm:text-start text-center px-[32px] my-[15px]">
+          Lorem ispum dolor sit amet Lorem ispum dolor sit amet Lorem ispum
+          dolor sit amet
+        </div>
+        <div className="pl-[0px] sm:pl-[32px] my-[25px] mx-auto sm:text-start text-center flex sm:justify-start justify-center flex-row gap-x-2">
+          <Button>REGISTER</Button>
+          <Button>KNOW MORE</Button>
+        </div>
+      </div>
+      <div className="w-[50vw] hidden flex-col items-center sm:flex my-auto lg:m-[0]">
+        <img
+          src={maticHero}
+          alt=""
+          className="w-[45%]  relative animate-wiggle "
+        />
+        <img src={baseHero} className="w-[60%]" alt="" />
+      </div>
+    </div>
+  );
+};
+
+export default Hero;

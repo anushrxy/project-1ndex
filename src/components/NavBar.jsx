@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Nav = () => {
   let Links = [
-    { name: "About", link: "/" },
+    { name: "About", link: "#About" },
     { name: "Features", link: "/" },
     { name: "Guide", link: "/" },
   ];
@@ -52,9 +52,9 @@ const Nav = () => {
               className="lg:ml-[8px] ml-0 btn btn-ghost btn-lg"
             >
               <div>
-                <Link to={link.link} className="duration-500">
+                <a href={link.link} className="duration-500">
                   {link.name}
-                </Link>
+                </a>
               </div>
             </li>
           ))}
