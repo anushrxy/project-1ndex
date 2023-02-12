@@ -4,6 +4,10 @@ module.exports = {
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
+  daisyui: {
+    themes: ["synthwave"],
+  },
+
   theme:  {
     animation: {
       'wiggle': 'wiggle 3s ease-in-out infinite',

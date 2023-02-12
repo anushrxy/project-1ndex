@@ -8,9 +8,7 @@ import { ethers } from "ethers";
 const Login = () => {
   const onLogin = () => {
     console.log("logged in");
-    const navigate = useNavigate();
-    navigate("/");
-    
+    return redirect("/");
   };
 
   
