@@ -2,15 +2,27 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
-import { AuthProvider } from "@arcana/auth";
+import { AuthProvider, CHAIN } from "@arcana/auth";
 import { ProvideAuth } from "@arcana/auth-react";
 import { BrowserRouter } from 'react-router-dom';
 
-const provider = new AuthProvider(`1b49478f247f0afdecf17a0f3f1ee55ad3053cf0`)
+const appAddress = 'c7d67b8c243fc2be269f188ce225ce18472e1dc4'
+const auth = new AuthProvider(`${appAddress}`, {
+  network: 'testnet', 
+  position: 'right', 
+  theme: 'dark', 
+  alwaysVisible: true, 
+  chainConfig: {
+    chainId: CHAIN.POLYGON_MUMBAI_TESTNET, 
+    rpcUrl: 'https://fragrant-greatest-sky.matic-testnet.discover.quiknode.pro/51a324530a248242144de9b79fc28e6f2272e30d/', 
+  },
+})
+
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ProvideAuth provider={provider}>
+    <ProvideAuth provider={auth}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
