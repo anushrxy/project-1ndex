@@ -14,10 +14,10 @@ const Nav = () => {
   return (
     <div className="shadow-md w-auto top-0 left-0 relative z-[10]">
       <div className="flex items-center justify-between bg-neutral px-10 h-[96px] shadow-nav">
-        <div className="cursor-pointer flex items-center text-2xl">
+        <Link to='/' className="cursor-pointer flex items-center text-2xl">
           <RiHandCoinLine alt="logo" className="h-[96px]" />
           <p className="font-bold ml-[10px]">AnyMoney</p>
-        </div>
+        </Link>
 
         <div
           onClick={() => setOpen(!open)}
@@ -47,16 +47,18 @@ const Nav = () => {
           }`}
         >
           {Links.map((link) => (
+            <Link to={link.link} >
             <li
               key={link.name}
               className="lg:ml-[8px] ml-0 btn btn-ghost btn-lg"
             >
               <div>
-                <a href={link.link} className="duration-500">
+                <p className="duration-500">
                   {link.name}
-                </a>
+                </p>
               </div>
             </li>
+            </Link>
           ))}
           <Link to='/login' className="btn btn-accent btn-outline text-white btn-lg lg:ml-[8px] ml-0  ">Sign In</Link>
         </ul>
