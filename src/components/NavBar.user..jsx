@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 
 const Nav = () => {
   let Links = [
-    { name: "About", link: "#About" },
-    { name: "Features", link: "/" },
-    { name: "Guide", link: "/" },
+    { name: "Wallet", link: "#About" },
+    { name: "Gullak", link: "/" },
+    { name: "Account", link: "/" },
   ];
   let [open, setOpen] = useState(false);
   return (
@@ -60,7 +60,7 @@ const Nav = () => {
             </li>
             </Link>
           ))}
-          <Link to='/login' className="btn btn-accent btn-outline text-white btn-lg lg:ml-[8px] ml-0  ">Sign In</Link>
+          <Link to='/login' className="btn btn-accent btn-outline text-white btn-lg lg:ml-[8px] ml-0">Sign In</Link>
         </ul>
       </div>
     </div>

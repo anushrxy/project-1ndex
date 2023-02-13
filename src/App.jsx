@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import NavBar from "../src/components/NavBar"
+import NavBarFirst from "../src/components/NavBar.first"
 import { Routes, Route } from 'react-router-dom';
 import { Home, Login } from './pages';
 import { useAuth } from '@arcana/auth-react';
@@ -29,7 +29,7 @@ const App = () => {
 // },[])
   return (
     <div className='overflow-hidden'>
-      <NavBar/>
+      <NavBarFirst/>
       <Routes>
         <Route path='/login' element={<Login/>} />
         <Route path='/' element={<Home/>} />
