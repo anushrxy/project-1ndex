@@ -4,7 +4,7 @@ import "../App.css";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Nav = () => {
+const Nav = ({address}) => {
   let Links = [
     { name: "Wallet", link: "#About" },
     { name: "Gullak", link: "/" },
@@ -60,7 +60,7 @@ const Nav = () => {
             </li>
             </Link>
           ))}
-          <Link to='/login' className="btn btn-accent btn-outline text-white btn-lg lg:ml-[8px] ml-0">Sign In</Link>
+          <Link to='/login' className="btn btn-accent btn-outline text-white btn-lg lg:ml-[8px] ml-0">{address}</Link>
         </ul>
       </div>
     </div>
