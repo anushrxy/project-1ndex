@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import NavBarFirst from "../src/components/NavBar.first"
 import { Routes, Route } from 'react-router-dom';
-import { Home, Login } from './pages';
+import { Home, Login, Gullak } from './pages';
 import { useAuth } from '@arcana/auth-react';
 import { ethers } from 'ethers';
 import Nav from './components/NavBar.user';
@@ -39,6 +39,7 @@ exec();
       <Routes>
         <Route path='/login' element={<Login/>} />
         <Route path='/' element={<Home/>} />
+        <Route path='/Gullak' element={<Gullak/>}/>
       </Routes>
     </div>
   )
