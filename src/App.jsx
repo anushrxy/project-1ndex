@@ -37,7 +37,7 @@ exec();
       {connectedAdd && <Nav address={address} />}
       
       <Routes>
-        <Route path='/login' element={<Login/>} />
+        <Route path='/login' element={<Login address={address}/>} />
         <Route path='/' element={<Home/>} />
         <Route path='/Gullak' element={<Gullak/>}/>
       </Routes>

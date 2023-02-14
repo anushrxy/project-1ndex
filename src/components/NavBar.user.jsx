@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const Nav = ({address}) => {
   let Links = [
     { name: "Wallet", link: "#About" },
-    { name: "Gullak", link: "/" },
+    { name: "Gullak", link: "/gullak" },
     { name: "Account", link: "/" },
   ];
   let [open, setOpen] = useState(false);

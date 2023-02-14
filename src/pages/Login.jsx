@@ -6,9 +6,10 @@ import { ethers } from "ethers";
 import { async } from "postcss-js";
 import { collection, getDocs } from "firebase/firestore";
 import { db, app } from '../../firebaseconfig'
+import CreateHandle from '../components/CreateHandle';
 
 
-const Login = () => {
+const Login = ({address}) => {
   const auth = useAuth();
 
   const onLogin = async () => {
@@ -25,16 +26,19 @@ const Login = () => {
     console.log(addressConnected[0])
 
 
+
+
+
     //firebase query test
     
 
-    const q = query(handlesRef, where("address", "==", addressConnected[0]));
+//     const q = query(handlesRef, where("address", "==", addressConnected[0]));
 
-const querySnapshot = await getDocs(q);
-querySnapshot.forEach((doc) => {
-  // doc.data() is never undefined for query doc snapshots
-  console.log(doc.id, " => ", doc.data());
-});
+// const querySnapshot = await getDocs(q);
+// querySnapshot.forEach((doc) => {
+//   // doc.data() is never undefined for query doc snapshots
+//   console.log(doc.id, " => ", doc.data());
+// });
 
     return redirect("/");
   };
@@ -78,8 +82,25 @@ querySnapshot.forEach((doc) => {
 
     // MetaMask requires requesting permission to connect users accounts
 
+
+
+ 
+
+
+  }  
+
+
+  useEffect(() => {
+
+  if(true || addressdoesntexist){
+    setHandleExists(false)
   }
 
+  }, [address])
+  
+
+
+  const [handleExists, setHandleExists] = useState(true);
 
 
 
@@ -91,7 +112,7 @@ querySnapshot.forEach((doc) => {
         </p>
       ) : auth.isLoggedIn ? (
         <>
-          <p className="text-5xl btn btn-outline btn-accent rounded-lg py-5 my-5 w-fit block h-fit mx-auto ">
+         {handleExists && <> <p className="text-5xl btn btn-outline btn-accent rounded-lg py-5 my-5 w-fit block h-fit mx-auto ">
             Logged In
           </p>
           <button className="btn btn-outline btn-accent rounded-lg py-5 my-5 w-fit block h-fit mx-auto " onClick={signTxn}>
@@ -99,10 +120,13 @@ querySnapshot.forEach((doc) => {
           </button>
           <button className="btn btn-outline btn-accent rounded-lg py-5 my-5 w-fit block h-fit mx-auto " onClick={logOut}>
             Logout
-          </button>
+          </button></>}
 
+          <div className="">
+      {!handleExists && <CreateHandle></CreateHandle>}
+      </div>
         </>
-      ) : (
+      ) :  (
         <div>
           <Auth
             externalWallet={false}
@@ -110,6 +134,7 @@ querySnapshot.forEach((doc) => {
           />
         </div>
       )}
+
     </div>
   );
 };
