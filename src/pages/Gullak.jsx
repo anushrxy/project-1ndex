@@ -1,12 +1,12 @@
-import React from 'react'
-import GullakComponent from '../components/Gullak.component'
+import React from "react";
+import GullakComponent from "../components/Gullak.component";
 
 function Gullak() {
   return (
     <div>
-        <GullakComponent/>
+      <GullakComponent />
     </div>
-  )
+  );
 }
 
-export default Gullak
+export default Gullak;

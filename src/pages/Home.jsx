@@ -1,14 +1,18 @@
 import React from "react";
-import Hero from "../components/Hero"
-import AboutUs from "../components/About"
-import Footer from "../components/Footer"
+import Hero from "../components/Hero";
+import AboutUs from "../components/About";
+import Footer from "../components/Footer";
+import Dashboard from "../components/Dashboard/Dashboard";
+import Transactions from "../components/Transactions/Transaction";
 
 const Home = () => {
   return (
     <div>
-      <Hero/>
-      <AboutUs/>
-      <Footer/>
+      <Hero />
+      <AboutUs />
+      <Dashboard />
+      <Transactions />
+      <Footer />
     </div>
   );
 };
