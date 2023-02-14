@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import NavBarFirst from "../src/components/NavBar.first"
 import { Routes, Route } from 'react-router-dom';
@@ -12,18 +11,17 @@ const App = () => {
   const[balance,setBalance] = useState(0);
   const [address, setAddress] = useState('');
 
-  const exec = async () => {
+  const exec = async()=>{
     const auth = useAuth();
-    const arcanaProvider = await auth.connect();
-    const provider = new ethers.providers.Web3Provider(arcanaProvider);
+    const arcanaProvider = await auth.connect()
+    const provider = new ethers.providers.Web3Provider(arcanaProvider)
     setConnectedAdd(await provider.send("eth_requestAccounts", []));
-    let balance = await provider.getBalance(connectedAdd[0]);
+    let balance = await provider.getBalance(connectedAdd[0])
     let balanceInEth = ethers.utils.formatEther(balance);
     setAddress(auth.user.address);
     setBalance(balanceInEth);
-    console.log(balance);
-    return balance;
-  };
+    console.log(balance)
+    return balance
 
 }
 exec();
@@ -37,15 +35,14 @@ exec();
     <div className='overflow-hidden'>
       {!connectedAdd && <NavBarFirst/>}
       {connectedAdd && <Nav address={address} />}
-      <Dashboard />
-      <Transaction />
+      
       <Routes>
         <Route path='/login' element={<Login address={address}/>} />
         <Route path='/' element={<Home/>} />
         <Route path='/Gullak' element={<Gullak/>}/>
       </Routes>
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
