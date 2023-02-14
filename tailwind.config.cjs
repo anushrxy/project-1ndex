@@ -5,7 +5,13 @@ module.exports = {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   daisyui: {
-    themes: ["synthwave"],
+    themes: [{
+      night: {
+        ...require("daisyui/src/colors/themes")["[data-theme=night]"],
+        primary: "#B4c6Ef",
+        "primary-focus": "mediumblue",
+      },
+    }],
   },
 
   theme:  {
