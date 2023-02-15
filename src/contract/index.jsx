@@ -3,73 +3,47 @@ export const abi = [
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "_name",
+				"name": "_handle",
 				"type": "string"
 			}
 		],
-		"name": "addName",
-		"outputs": [],
+		"name": "updateHandle",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "userHandle",
+						"type": "string"
+					}
+				],
+				"internalType": "struct appUserHandles.OwnerHandle",
+				"name": "",
+				"type": "tuple"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "showBal",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"stateMutability": "payable",
-		"type": "constructor"
-	},
-	{
-		"inputs": [],
-		"name": "greet",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "_name",
-				"type": "string"
+				"internalType": "address",
+				"name": "_checkAddress",
+				"type": "address"
 			}
 		],
-		"name": "Greet",
+		"name": "checkAddress",
 		"outputs": [
 			{
-				"internalType": "string",
+				"internalType": "bool",
 				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "myNumber",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -83,15 +57,20 @@ export const abi = [
 				"type": "uint256"
 			}
 		],
-		"name": "names",
+		"name": "handles",
 		"outputs": [
 			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
 				"internalType": "string",
-				"name": "",
+				"name": "userHandle",
 				"type": "string"
 			}
 		],
 		"stateMutability": "view",
 		"type": "function"
 	}
-];
+]
