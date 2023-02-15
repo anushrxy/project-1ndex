@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import NavBarFirst from "../src/components/NavBar.first"
+import SendRequest from './components/SendRequest'
 import { Routes, Route } from 'react-router-dom';
 import { Home, Login, Gullak } from './pages';
 import { useAuth } from '@arcana/auth-react';
@@ -25,6 +26,7 @@ const App = () => {
 
 }
 exec();
+const handle="rajwitheth";
 
 // useEffect(()=>{
 //   exec().then((data)=>{
@@ -40,6 +42,7 @@ exec();
         <Route path='/login' element={<Login address={address}/>} />
         <Route path='/' element={<Home/>} />
         <Route path='/Gullak' element={<Gullak/>}/>
+         <Route path='/request' element={<SendRequest address={address} handle={handle} />}></Route>
       </Routes>
     </div>
   )

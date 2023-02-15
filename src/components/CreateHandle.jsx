@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 const CreateHandle = () => {
   const [available, setAvailable] = useState("unchecked");
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState("");
 
   const checkAvailability=()=>{
     
@@ -30,7 +30,7 @@ const CreateHandle = () => {
           className={` btn  border-[2px] border-base-300 mt-5 text-base-300 hover:bg-base-300 hover:text-primary hover:border-none`}
           onClick={()=>{setAvailable('loading');checkAvailability(value)}}
         >
-         {available==="unchecked"?"Check Availability":available==="false"?"Try Another":available=="loading"?"loading":"Claim This Address"}
+         {available==="unchecked"?"Check And Claim":available==="false"?"Try Another":available=="loading"?"loading":"Claim This Address"}
         </button>
       </div>
     </div>

@@ -8,6 +8,7 @@ const Nav = ({address}) => {
   let Links = [
     { name: "Wallet", link: "#About" },
     { name: "Gullak", link: "/gullak" },
+    { name: "request", link: "/request" },
     { name: "Account", link: "/" },
   ];
   let [open, setOpen] = useState(false);
