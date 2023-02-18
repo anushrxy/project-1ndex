@@ -9,7 +9,7 @@ const Nav = ({address}) => {
     { name: "Wallet", link: "#About" },
     { name: "Gullak", link: "/gullak" },
     { name: "request", link: "/request" },
-    { name: "Account", link: "/" },
+    { name: "Account", link: "/user" },
   ];
   let [open, setOpen] = useState(false);
   return (
