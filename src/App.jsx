@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import NavBarFirst from "../src/components/NavBar.first"
 import SendRequest from './components/SendRequest'
 import { Routes, Route } from 'react-router-dom';
-import { Home, Login, Gullak } from './pages';
+import { Home, Login, Gullak, Wallet } from './pages';
 import { useAuth } from '@arcana/auth-react';
 import { ethers } from 'ethers';
 import Nav from './components/NavBar.user';
@@ -43,6 +43,7 @@ const handle="rajwitheth";
         <Route path='/' element={<Home/>} />
         <Route path='/Gullak' element={<Gullak/>}/>
          <Route path='/request' element={<SendRequest address={address} handle={handle} />}></Route>
+        <Route path='/Wallet' element={<Wallet/>}/>
       </Routes>
     </div>
   )
