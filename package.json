@@ -12,6 +12,7 @@
     "@arcana/auth": "^1.0.0",
     "@arcana/auth-react": "^0.0.2",
     "daisyui": "^2.50.0",
+    "dotenv": "^16.0.3",
     "ethers": "^5.7.0",
     "firebase": "^9.17.1",
     "react": "^18.2.0",

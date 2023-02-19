@@ -6,10 +6,10 @@ import { Link } from "react-router-dom";
 
 const Nav = ({address}) => {
   let Links = [
-    { name: "Wallet", link: "#About" },
+    { name: "Wallet", link: "/Wallet" },
     { name: "Gullak", link: "/gullak" },
     { name: "request", link: "/request" },
-    { name: "Account", link: "/" },
+    { name: "Account", link: "/user" },
   ];
   let [open, setOpen] = useState(false);
   return (
