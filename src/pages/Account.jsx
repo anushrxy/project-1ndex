@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../../firebaseconfig";
+import { ethers } from "ethers";
+import { useAuth } from "@arcana/auth-react";
+import { abiUserHandles } from "../contract";
 import {
   collection,
   query,
@@ -7,25 +10,41 @@ import {
   orderBy,
   limit,
   getDocs,
+  doc, updateDoc
 } from "firebase/firestore";
 import { maticHero } from "../assets";
 import Button from "../components/shared/Button";
+
 const Alert = ({ from, amount, id , handle,getData}) => {
+  const auth = useAuth();
     const rejectRequest = async() => { 
         console.log("reject request run");
-        const docRef= doc(db,`handles/@${handle}/alerts/${id}`);
+        const docRef= doc(db,`handles/${handle}/alerts/${id}`);
         await updateDoc(docRef, {
             status : 'ignored'
           });
         getData();
     };
     const acceptRequest = async() => { 
-        console.log("reject request run");
-        const docRef= doc(db,`handles/@${handle}/alerts/${id}`);
+        console.log("accept request run");
+        const arcanaProvider = await auth.connect();
+        const provider = new ethers.providers.Web3Provider(arcanaProvider);
+        const signer = provider.getSigner();
+        const contractAddress = "0x64AF05A9DaD9BbD9Dd580963E14e1e3b5825ffbC";
+        const contract = new ethers.Contract(contractAddress,abiUserHandles,signer)
+        const address = await contract.fetchAddress(from);
+        const txn = {
+          to: address,
+          value: ethers.utils.parseEther(amount)
+        }
+        const txnHash = await signer.sendTransaction(txn);
+        console.log(txnHash);
+        const docRef= doc(db,`handles/${handle}/alerts/${id}`);
         await updateDoc(docRef, {
             status : 'accepted'
           });
         getData();
+        console.log('accepted')
     };
 
 
@@ -46,7 +65,7 @@ const Alert = ({ from, amount, id , handle,getData}) => {
                     ></path>
                 </svg>
                 <p className="mx-2  ">
-                    <span className="font-semibold text-accent">@{from}</span> has
+                    <span className="font-semibold text-accent">{from}</span> has
                     requested {amount} Matic
                 </p>
             </div>
@@ -66,7 +85,7 @@ const Account = ({maticRate, handle, address,balance,balanceInr}) => {
 
 
     const getData = async () => {
-        const alertsRef = collection(db, `handles/${"@"+handle}/alerts`);
+        const alertsRef = collection(db, `handles/${handle}/alerts`);
         const q = query(
             alertsRef,
             where("status", "==", "unread"),
