@@ -6,11 +6,13 @@ import { Home, Login, Gullak,Account,Wallet } from './pages';
 import { useAuth } from '@arcana/auth-react';
 import { ethers } from 'ethers';
 import Nav from './components/NavBar.user';
+import axios from 'axios';
 
 const App = () => {
   const[connectedAdd,setConnectedAdd] = useState("");
   const[balance,setBalance] = useState(0);
   const [address, setAddress] = useState('');
+  const [maticRate, setMaticRate] = useState(125);
   const auth = useAuth();
   // const[notDone,setNotDone] = useState(true);
 
@@ -30,8 +32,32 @@ const exec = async()=>{
 
 }
 
+const fetchCurrentRate=async()=>{
+  let headersList = {
+    "content-type": "application/json",
+    "x-api-key": "a3125637-2c31-48de-b6a0-f8b504562507" 
+   }
+   
+   let bodyContent = JSON.stringify({"currency": "INR",
+   "code": "MATIC",
+   "meta": true});
+   
+   let reqOptions = {
+     url: "https://api.livecoinwatch.com/coins/single",
+     method: "POST",
+     headers: headersList,
+     data: bodyContent,
+   }
+   
+   let response = await axios.request(reqOptions);
+   setMaticRate(await response.data.rate);
+   console.log(maticRate)
+   
+}
+
 useEffect(()=>{
   exec();
+  fetchCurrentRate();
 })
 
 

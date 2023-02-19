@@ -7,11 +7,10 @@ const Hero = () => {
     <div className="flex h-screen items-start">
       <div className="w-full sm:w-[50vw] my-auto">
         <div className="text-[30px] sm:text-[5vw] font-bold leading-tight sm:text-start text-center px-[32px]">
-          Lorem Ipsum with AnyBunny
+          Manage And Save Like a Pro with PayPol
         </div>
         <div className="text-secondary text-base sm:text-2xl font-semibold sm:w-[50vw] w-full sm:text-start text-center px-[32px] my-[15px]">
-          Lorem ispum dolor sit amet Lorem ispum dolor sit amet Lorem ispum
-          dolor sit amet
+        PayPol lets you Send And receive tokens on the polygon network with a simple interface
         </div>
         <div className="pl-[0px] sm:pl-[32px] my-[25px] mx-auto sm:text-start text-center flex sm:justify-start justify-center flex-row gap-x-2">
           <Button>REGISTER</Button>
