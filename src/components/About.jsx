@@ -1,4 +1,6 @@
 import React from "react";
+import {FaEthereum} from "react-icons/fa"
+
 const About = () => {
 
   const features=[
@@ -36,8 +38,8 @@ const About = () => {
           built on the blockchain, which provides a decentralized, secure, and
           transparent way to transfer value between users.
         </div>
-        <div className="flex sm:flex-row col-span-8 flex-col gap-2">
-          {features.map((item)=>(<div key={item.name} className="w-[90%] sm:w-96 bg-base-100 shadow-xl">
+        <div className="flex sm:flex-row col-span-8 flex-col gap-1">
+          {features.map((item)=>(<div key={item.name} className="w-[90%] sm:w-96 bg-neutral shadow-xl">
             <div className="card-body flex flex-col gap-10">
               <h2 className="card-title text-3xl">{item.name}</h2>
               <p className="text-lg">{item.desc}</p>
