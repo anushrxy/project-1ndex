@@ -3,3 +3,4 @@ export {default as Home} from './Home';
 export {default as Gullak} from './Gullak';
 export {default as Account} from './Account';
 export {default as Wallet} from './Wallet';
+export {default as NotFound} from './NotFound'

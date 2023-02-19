@@ -6,20 +6,25 @@ function GullakComponent() {
   const [defaultTabStatus, setDefaultTabStatus] = useState("tab-active");
   const [defaultBtnStatus, setDefaultBtnStatus] = useState("");
   const [btnStatus, setBtnStatus] = useState("hidden");
+  const [formStatus, setFormStatus] = useState("");
   const handleClick = () => {
     if (tabStatus === "tab-active") {
       setTabStatus("");
       setBtnStatus("hidden");
+      setFormStatus("hidden")
     } else {
       setTabStatus("tab-active");
       setBtnStatus("");
+      setFormStatus("")
     }
     if (defaultTabStatus === "tab-active") {
       setDefaultTabStatus("");
       setDefaultBtnStatus("hidden");
+      setFormStatus("hidden");
     } else {
       setDefaultTabStatus("tab-active");
       setDefaultBtnStatus("");
+      setFormStatus("");
     }
   };
 
@@ -62,7 +67,7 @@ function GullakComponent() {
                 <input
                   type="text"
                   placeholder="0.00"
-                  className="input w-full max-w-[150px] text-base-300 font-normal bg-primary border-t-0 border-x-0 border-b-[2px] border-base-300 outline-none rounded-none placeholder:text-gray-500 placeholder:text-xl text-xl text-center"
+                  className={`${formStatus} input w-full max-w-[150px] text-base-300 font-normal bg-primary border-t-0 border-x-0 border-b-[2px] border-base-300 outline-none rounded-none placeholder:text-gray-500 placeholder:text-xl text-xl text-center`}
                 />
                 <button
                   className={`${defaultBtnStatus} btn btn-outline border-[2px] border-base-300 mt-5 text-base-300 hover:bg-base-300 hover:text-primary hover:border-none`}
@@ -70,7 +75,7 @@ function GullakComponent() {
                   Add to Gullak
                 </button>
                 <button
-                  className={`${btnStatus} btn btn-outline border-[2px] border-base-300 mt-5 text-base-300 hover:bg-base-300 hover:text-primary hover:border-none`}
+                  className={`${btnStatus} btn btn-outline border-[2px] border-base-300 my-[34px] text-base-300 hover:bg-base-300 hover:text-primary hover:border-none`}
                 >
                   Reedem from Gullak
                 </button>
