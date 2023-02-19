@@ -6,6 +6,7 @@ import { async } from "postcss-js";
 import { collection, getDocs } from "firebase/firestore";
 import { db, app } from '../../firebaseconfig'
 import CreateHandle from '../components/CreateHandle';
+import NotFound from "./NotFound";
 
 
 const Login = ({address, handle}) => {
@@ -79,10 +80,10 @@ const Login = ({address, handle}) => {
         </p>
       ) : auth.isLoggedIn ? (
         <>
-         <You Already have a handle></You>
 
           <div className="">
       {!handleExists && <CreateHandle></CreateHandle>}
+      {handleExists && <NotFound></NotFound>}
       </div>
         </>
       ) :  (

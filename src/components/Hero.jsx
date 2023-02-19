@@ -20,7 +20,7 @@ const Hero = ({ handle }) => {
         <div className="pl-[0px] sm:pl-[32px] my-[25px] mx-auto sm:text-start text-center flex sm:justify-start justify-center flex-row gap-x-2">
           {!handle.length && (
             <Link to="/login">
-              <Button>Sign In</Button>
+              <Button>Get a Handle</Button>
             </Link>
           )}
           <Button> <a href="#About"> KNOW MORE</a></Button>
