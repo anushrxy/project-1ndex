@@ -105,7 +105,7 @@ const handle="rajwitheth";
       
       <Routes>
         <Route path='/login' element={<Login address={address} handle={userHandle}/>} />
-        <Route path='/' element={<Home/>} />
+        <Route path='/' element={<Home handle={userHandle}/>} />
         <Route path='/*' element={<NotFound/>}/>
         {address && <>
         <Route path='/Gullak' element={<Gullak/>} maticRate={maticRate}  address={address} handle={userHandle}  />
