@@ -3,10 +3,10 @@ import Hero from "../components/Hero";
 import AboutUs from "../components/About";
 import Footer from "../components/Footer";
 
-const Home = () => {
+const Home = ({handle}) => {
   return (
     <div>
-      <Hero />
+      <Hero handle={handle} />
       <AboutUs />
       <Footer />
     </div>
