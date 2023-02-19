@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Auth, useAuth } from "@arcana/auth-react";
 import { redirect } from "react-router-dom";
-import { abi } from "../contract";
 import { ethers } from "ethers";
 import { async } from "postcss-js";
 import { collection, getDocs } from "firebase/firestore";
@@ -16,17 +15,12 @@ const Login = ({address}) => {
 
     const handlesRef = collection(db, "handles");
 
-
-
     console.log("logged in");
     // Fetches connected address
     const arcanaProvider = await auth.connect();
-    const provider = new ethers.providers.Web3Provider(arcanaProvider)
-    const addressConnected = await provider.send("eth_requestAccounts", [])
-    console.log(addressConnected[0])
-
-
-
+    const provider = new ethers.providers.Web3Provider(arcanaProvider);
+    const addressConnected = await provider.send("eth_requestAccounts", []);
+    console.log(addressConnected[0]) 
 
 
     //firebase query test
@@ -53,35 +47,17 @@ const Login = ({address}) => {
   const [count, setCount] = useState(0)
   async function signTxn() {
     
-        // console.log("Trying...")
-        console.log(auth.isLoggedIn)
-        const arcanaProvider = await auth.connect();
-        const provider = new ethers.providers.Web3Provider(arcanaProvider)
-        const signer = provider.getSigner()
-        const appAddress = "0xe682D7669eC8a7370a6DDCf5E0BacA4cb60864D2" ;
-        const contract = new ethers.Contract(appAddress,abi,signer);
-        try {
-          const res = await contract.checkAddress("0xe682D7669eC8a7370a6DDCf5E0BacA4cb60864D2")
-          console.log(res);
-        }
-        catch (e) {
-          console.log(false);
-        }
-
-        // const res =await contract.addName(`arcanawallet${count}`);
-        // console.log(res);
-        // console.log("dsdsd")
-
-        // const txnSend = {
-        //   to: "0x171a893e5675092304ccC4bf0d2335d553ABD81A",
-        //   value: ethers.utils.parseEther("0.1")
-        // }
-        // // const signedTxn = signer.signTransaction(txnSend);
-        // const res = await signer.sendTransaction(txnSend);
-        // console.log(res);
-        // console.log(auth)
-        // const info = await auth.user ;
-        // console.log(`id: ${info.id} \naddress: ${info.address}`)
+    try {console.log("Start...");
+    // await auth.init();
+    const arcanaProvider = await auth.connect();
+    const provider = new ethers.providers.Web3Provider(arcanaProvider);
+    const signer = provider.getSigner();
+    const accountsArr = provider.send("eth_requestAccounts", []);
+    const account = accountsArr[0];
+    // setAddress(account);
+    console.log(await provider.getBlockNumber());
+    }
+    catch(e) {console.log(e)}
 
 
 
@@ -101,14 +77,14 @@ const Login = ({address}) => {
   useEffect(() => {
 
   if(true || addressdoesntexist){
-    setHandleExists(false)
+    // setHandleExists(true)
   }
 
   }, [address])
   
 
 
-  const [handleExists, setHandleExists] = useState(true);
+  const [handleExists, setHandleExists] = useState(false);
 
 
 

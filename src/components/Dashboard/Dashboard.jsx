@@ -8,7 +8,7 @@ const Dashboard = () => {
           className="ml-16 w-32 h-32 rounded-full border-stone-400 border-4"
         />
       </div>
-      <div class="h-40 w-0.5 bg-gray-300 opacity-50 " />
+      <div className="h-40 w-0.5 bg-gray-300 opacity-50 " />
       <div className="textcontainer flex flex-col space-y-6 mr-4">
         <span className="flex flex-row space-x-5">
           <h1 className="m-auto font-semibold">GM:</h1>

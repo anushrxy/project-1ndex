@@ -11,32 +11,43 @@ const App = () => {
   const[connectedAdd,setConnectedAdd] = useState("");
   const[balance,setBalance] = useState(0);
   const [address, setAddress] = useState('');
+  const auth = useAuth();
+  // const[notDone,setNotDone] = useState(true);
 
-  const exec = async()=>{
-    const auth = useAuth();
-    const arcanaProvider = await auth.connect()
-    const provider = new ethers.providers.Web3Provider(arcanaProvider)
-    setConnectedAdd(await provider.send("eth_requestAccounts", []));
-    let balance = await provider.getBalance(connectedAdd[0])
-    let balanceInEth = ethers.utils.formatEther(balance);
-    setAddress(auth.user.address);
-    setBalance(balanceInEth);
-    console.log(balance)
-    return balance
+const exec = async()=>{
+    // console.log("Start...");
+    // await auth.init();
+    try{
+      const arcanaProvider = await auth.connect();
+      const provider = new ethers.providers.Web3Provider(arcanaProvider);
+      const signer = provider.getSigner();
+      const accountsArr = await provider.send("eth_requestAccounts", []);
+      const account = accountsArr[0];
+      setAddress(account);
+    }
+    catch(e) {console.log(e);}
+    // console.log("End");
 
 }
-exec();
+
+useEffect(()=>{
+  exec();
+})
+
+
+
+
+
+
+
+
+
 const handle="rajwitheth";
 
-// useEffect(()=>{
-//   exec().then((data)=>{
-//     console.log(data)
-//   })
-// },[])
   return (
     <div className='overflow-hidden'>
-      {!connectedAdd && <NavBarFirst/>}
-      {connectedAdd && <Nav address={address} />}
+      {!address && <NavBarFirst/>}
+      {address && <Nav address={address} />}
       
       <Routes>
         <Route path='/login' element={<Login address={address}/>} />

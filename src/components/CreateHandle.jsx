@@ -1,16 +1,26 @@
+import { useAuth } from '@arcana/auth-react';
+import { ethers } from 'ethers';
 import React, { useState } from 'react'
+import { abiUserHandles } from '../contract';
 
 
 const CreateHandle = () => {
   const [available, setAvailable] = useState("unchecked");
   const [value, setValue] = useState("");
+  const auth = useAuth();
 
-  const checkAvailability=()=>{
+  const checkAvailability= async()=>{
     
-    if(true|| valueExists){
+    const arcanaProvider = await auth.connect();
+    const provider = new ethers.providers.Web3Provider(arcanaProvider);
+    const signer = provider.getSigner();
+    const addressUserHandle = "0xA61D71A2f44293b8684A1F40c16aE6bbd1718B45" ;
+    const contract = new ethers.Contract(addressUserHandle,abiUserHandles,signer);
+    const handleExists = await contract.checkHandle(value);
+    if(handleExists){
       setAvailable("false");
     }
-    else{
+    if(!handleExists){
       setAvailable("true");
     }
     
@@ -24,7 +34,7 @@ const CreateHandle = () => {
         
         <label className="input-group w-fit mx-auto ">
           <span>Your Handlle</span>
-          <input type="text" placeholder="yourname.eth" className="input input-bordered" value={value} onChange={(e)=>{e.preventDefault(); setAvailable("unchecked"); setValue(e.target.value);}} />
+          <input type="text" placeholder="Starts with @..." className="input input-bordered" value={value} onChange={(e)=>{e.preventDefault(); setAvailable("unchecked"); setValue(e.target.value);}} />
         </label>
         <button
           className={` btn  border-[2px] border-base-300 mt-5 text-base-300 hover:bg-base-300 hover:text-primary hover:border-none`}
