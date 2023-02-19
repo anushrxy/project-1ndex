@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import { useAuth } from "@arcana/auth-react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
+import { ethers } from "ethers";
+import { async } from "@firebase/util";
+import { abiGullak } from "../contract";
 
 function GullakComponent() {
   const [tabStatus, setTabStatus] = useState("");
@@ -7,6 +11,8 @@ function GullakComponent() {
   const [defaultBtnStatus, setDefaultBtnStatus] = useState("");
   const [btnStatus, setBtnStatus] = useState("hidden");
   const [formStatus, setFormStatus] = useState("");
+  const [value,setValue] = useState(0);
+  const auth = useAuth();
   const handleClick = () => {
     if (tabStatus === "tab-active") {
       setTabStatus("");
@@ -28,8 +34,52 @@ function GullakComponent() {
     }
   };
 
-  const matic = 20.22;
-  const real_value = 6969;
+  const [matic,setMatic] = useState(0);
+  const real_value = matic * 125 ;
+
+  async function fetchGullakBal() {
+    console.log('use effect runS')
+    const arcanaProvider = await auth.connect();
+    const provider = new ethers.providers.Web3Provider(arcanaProvider);
+    const signer = provider.getSigner();
+    const addressGullak = "0xc029705eB245286E1B424BC6D29CE7Db31aa9628";
+    const contract = new ethers.Contract(addressGullak,abiGullak,signer);
+    const gullakBal = await contract.getGullakBalance();
+    const gullakBalance = ethers.utils.formatEther(gullakBal);
+    console.log(gullakBalance);
+    setMatic(gullakBalance);
+  }
+
+  useEffect(() => {
+    fetchGullakBal();
+  }, [])
+  
+
+  async function addtoGullak() {
+    const arcanaProvider = await auth.connect();
+    const provider = new ethers.providers.Web3Provider(arcanaProvider);
+    const signer = provider.getSigner();
+    const addressGullak = "0xc029705eB245286E1B424BC6D29CE7Db31aa9628";
+    const contract = new ethers.Contract(addressGullak,abiGullak,signer);
+    const sendValue = {value: ethers.utils.parseEther(value)} ;
+    const addMatics = await contract.sendMatic(sendValue);
+    if(addMatics){
+      fetchGullakBal();
+    }
+  }
+
+  async function redeem() {
+    const arcanaProvider = await auth.connect();
+    const provider = new ethers.providers.Web3Provider(arcanaProvider);
+    const signer = provider.getSigner();
+    const addressGullak = "0xc029705eB245286E1B424BC6D29CE7Db31aa9628";
+    const contract = new ethers.Contract(addressGullak,abiGullak,signer);
+    await contract.fetchBack();
+
+
+  }
+
+
   return (
     <div className="mt-[20px] sm:mt-[50px] mx-[20px] bg-inherit">
       <div className="flex justify-center items-center">
@@ -68,14 +118,15 @@ function GullakComponent() {
                   type="text"
                   placeholder="0.00"
                   className={`${formStatus} input w-full max-w-[150px] text-base-300 font-normal bg-primary border-t-0 border-x-0 border-b-[2px] border-base-300 outline-none rounded-none placeholder:text-gray-500 placeholder:text-xl text-xl text-center`}
+                  onChange={(e)=>{setValue(e.target.value)}}
                 />
                 <button
-                  className={`${defaultBtnStatus} btn btn-outline border-[2px] border-base-300 mt-5 text-base-300 hover:bg-base-300 hover:text-primary hover:border-none`}
+                  className={`${defaultBtnStatus} btn btn-outline border-[2px] border-base-300 mt-5 text-base-300 hover:bg-base-300 hover:text-primary hover:border-none`} onClick={addtoGullak}
                 >
                   Add to Gullak
                 </button>
                 <button
-                  className={`${btnStatus} btn btn-outline border-[2px] border-base-300 my-[34px] text-base-300 hover:bg-base-300 hover:text-primary hover:border-none`}
+                  className={`${btnStatus} btn btn-outline border-[2px] border-base-300 my-[34px] text-base-300 hover:bg-base-300 hover:text-primary hover:border-none`} onClick={redeem}
                 >
                   Reedem from Gullak
                 </button>
