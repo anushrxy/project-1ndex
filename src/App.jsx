@@ -93,8 +93,8 @@ const handle="rajwitheth";
         <Route path='/' element={<Home/>} />
         <Route path='/Gullak' element={<Gullak/>}/>
         <Route path='/user' element={<Account/>}/>
-         <Route path='/request' element={<SendRequest address={address} handle={handle} />}></Route>
-        <Route path='/Wallet' element={<Wallet/>}/>
+        <Route path='/request' element={<SendRequest address={address} handle={userHandle} />}></Route>
+        <Route path='/Wallet' element={<Wallet address={address} handle={userHandle}/>}/>
       </Routes>
     </div>
   )
