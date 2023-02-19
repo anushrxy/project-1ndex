@@ -7,26 +7,17 @@ import { useAuth } from "@arcana/auth-react";
 import { ethers } from "ethers";
 import { abiUserHandles } from "../contract";
 
-function WalletComponent({address, handle}) {
-  const [balance,setBalance] = useState(0);
+function WalletComponent({address, handle,balance, balanceInr}) {
   const [isHandle, setIsHandle] = useState("handle" || "address" || "ens");
   const [data, setData] = useState({ "to": '', "value": 0, "date": null });
   const initialState = "true";
   const [available, setAvailable] = useState(initialState);
 
   const auth = useAuth();
-  async function fetchBalance() {
-    const arcanaProvider = await auth.connect();
-    const provider = new ethers.providers.Web3Provider(arcanaProvider);
-    const accBalance = await provider.getBalance(address);
-    const balValue = ethers.utils.formatEther(accBalance);
-    setBalance(balValue);
 
-  }
   useEffect(() => {
   
 
-    fetchBalance();
     
     
     
@@ -59,7 +50,7 @@ function WalletComponent({address, handle}) {
 
     try {
 
-      const alertsRef = collection(db, `handles/${data.to}/alerts`);
+      const alertsRef = collection(db, `handles/@${data.to}/alerts`);
       // const alertsRef = db.collection("handles").doc(user.handle).collection("alerts");
 
       await setDoc(doc(alertsRef), { "date": new Date(), "from": handle, "value": data.value, "status": "unread" });
@@ -154,17 +145,17 @@ function WalletComponent({address, handle}) {
                 <p className='text-xl text-thin '>
                   address <span className='sm:inline-block block input input-disabled bg-base-300 p-x-5 py-2 sm:ml-5 my-2 sm:my-0 ml-0 cursor-default '>{address} </span>
                 </p>
-                <p className='text-xl text-thin '>
+                <div className='text-xl text-thin '>
                   Balance
                   <div className='sm:inline-block block my-2 md:my-0'>
                     <span className='input py-2 input-disabled bg-base-300 p-x-5 sm:ml-5 cursor-default'>{balance}
                       <span className='bg-secondary px-5 py-2  -mr-5 ml-2 rounded-r-lg'>MATIC </span>
                     </span>
-                    <span className='input py-2 input-disabled bg-base-300  p-x-5 sm:ml-5 cursor-default'>{balance}
+                    <span className='input py-2 input-disabled bg-base-300  p-x-5 sm:ml-5 cursor-default'>{balanceInr}
                       <span className=' bg-secondary px-5 py-2  -mr-5 ml-2 rounded-r-lg'>INR </span>
                     </span>
                   </div>
-                </p>
+                </div>
               </div>
             </div>
             <div className="bg-base-300 mt-3 w-full rounded-md">

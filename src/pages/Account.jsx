@@ -10,62 +10,81 @@ import {
 } from "firebase/firestore";
 import { maticHero } from "../assets";
 import Button from "../components/shared/Button";
-
-const Alert = ({ from, amount }) => (
-  <div className="alert shadow-lg">
-    <div>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        className="stroke-primary flex-shrink-0 w-6 h-6"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-        ></path>
-      </svg>
-      <p className="mx-2  ">
-        <span className="font-semibold text-accent">@{from}</span> has requested{" "}
-        {amount} Matic
-      </p>
-    </div>
-    <div className="flex flex-wrap items-center justify-center">
-      <button className="btn btn-sm btn-ghost">Reject Request</button>
-      <button className="btn btn-sm btn-accent">Send {amount} Matic</button>
-    </div>
-  </div>
-);
-
-const Account = () => {
-  const account = "rajwithmatic";
-  const address = "0xabs123456789012345678901234567890";
-  const balance = "6969";
-  const balanceInr = "69k";
-  const [alertsData, setAlertsData] = useState();
-
-  useEffect(() => {
-    const getData = async () => {
-      const alertsRef = collection(db, `handles/${account}/alerts`);
-      const q = query(
-        alertsRef,
-        where("status", "==", "unread"),
-        orderBy("date", "desc"),
-        limit(5)
-      );
-      const querySnapshot = await getDocs(q);
-      const data = [];
-      await querySnapshot.forEach((doc) => {
-        data.push(doc.data());
-      });
-      setAlertsData(data);
-      console.log(alertsData);
+const Alert = ({ from, amount, id , handle,getData}) => {
+    const rejectRequest = async() => { 
+        console.log("reject request run");
+        const docRef= doc(db,`handles/@${handle}/alerts/${id}`);
+        await updateDoc(docRef, {
+            status : 'ignored'
+          });
+        getData();
+    };
+    const acceptRequest = async() => { 
+        console.log("reject request run");
+        const docRef= doc(db,`handles/@${handle}/alerts/${id}`);
+        await updateDoc(docRef, {
+            status : 'accepted'
+          });
+        getData();
     };
 
-    getData();
-  }, []);
+
+    return (
+        <div className="alert shadow-lg">
+            <div>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    className="stroke-primary flex-shrink-0 w-6 h-6"
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
+                </svg>
+                <p className="mx-2  ">
+                    <span className="font-semibold text-accent">@{from}</span> has
+                    requested {amount} Matic
+                </p>
+            </div>
+            <div className="flex flex-wrap items-center justify-center">
+                <button className="btn btn-sm btn-ghost" onClick={rejectRequest}>
+                    Reject Request
+                </button>
+                <button className="btn btn-sm btn-accent" onClick={acceptRequest}>Send {amount} Matic</button>
+            </div>
+        </div>
+    );
+};
+
+const Account = ({maticRate, handle, address,balance,balanceInr}) => {
+   
+    const [alertsData, setAlertsData] = useState();
+
+
+    const getData = async () => {
+        const alertsRef = collection(db, `handles/${"@"+handle}/alerts`);
+        const q = query(
+            alertsRef,
+            where("status", "==", "unread"),
+            orderBy("date", "desc"),
+            limit(5)
+        );
+        const querySnapshot = await getDocs(q);
+        const data = [];
+        querySnapshot.forEach((doc) => {
+            data.push(doc);
+        });
+        setAlertsData(data);
+        console.log(alertsData);
+    };
+
+    useEffect(() => {
+        getData();
+    }, []);
 
   // getData();
 
@@ -76,7 +95,7 @@ const Account = () => {
       </div>
       <div className="flex flex-col gap-10">
         <h1 className="text-primary sm:text-start text-center font-bold text-5xl md:text-6xl mb-5">
-          gm @{account}
+          gm {handle}
         </h1>
         <p className="text-xl text-thin ">
           address{" "}
@@ -106,8 +125,9 @@ const Account = () => {
         <div className="-mb-30">
           <h1 className="text-2xl w-fit m-auto font-semibold my-5">Requests</h1>
           <div className="flex flex-col items-center gap-10 sm:max-h-[30vh] overflow-auto ">
-            {alertsData?.map((data) => {
-              return <Alert from={data.from} amount={data.value} />;
+            {alertsData?.map((doc) => {
+              return <Alert from={doc.data().from} amount={doc.data().value} handle={handle
+            } id={doc.id} getData={getData} />;
             })}
           </div>
           <button className=" underline underline-offset-4 mt-4 mb-6 ">

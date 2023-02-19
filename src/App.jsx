@@ -11,11 +11,28 @@ import { abiUserHandles } from './contract';
 const App = () => {
   const[connectedAdd,setConnectedAdd] = useState("");
   const[balance,setBalance] = useState(0);
+  const[balanceInr,setBalanceInr] = useState(0);
   const [address, setAddress] = useState('');
   const [userHandle, setUserHandle] = useState("")
   const [maticRate, setMaticRate] = useState(125);
   const auth = useAuth();
   // const[notDone,setNotDone] = useState(true);
+  
+
+  async function fetchBalance() {
+    const arcanaProvider = await auth.connect();
+    const provider = new ethers.providers.Web3Provider(arcanaProvider);
+    const accBalance = await provider.getBalance(address);
+    const balValue = ethers.utils.formatEther(accBalance);
+    setBalance(balValue);
+    setBalanceInr(balance*Math.round((maticRate*100))/100);
+
+  }
+
+  useEffect(() => {  
+    fetchBalance();
+  })
+  
 
 const exec = async()=>{
     // console.log("Start...");
@@ -63,14 +80,13 @@ const fetchCurrentRate=async()=>{
    
    let response = await axios.request(reqOptions);
    setMaticRate(await response.data.rate);
-   console.log(maticRate)
    
 }
 
 useEffect(()=>{
   exec();
   fetchCurrentRate();
-})
+},[])
 
 
 
@@ -88,13 +104,16 @@ const handle="rajwitheth";
       {address && <Nav address={address} handle={userHandle}/>}
       
       <Routes>
-        <Route path='/login' element={<Login address={address}/>} />
+        <Route path='/login' element={<Login address={address} handle={userHandle}/>} />
         <Route path='/' element={<Home/>} />
-        <Route path='/Gullak' element={<Gullak/>}/>
-        <Route path='/user' element={<Account/>}/>
-        <Route path='/Wallet' element={<Wallet address={address} handle={userHandle}/>}/>
         <Route path='/*' element={<NotFound/>}/>
+        {address && <>
+        <Route path='/Gullak' element={<Gullak/>} maticRate={maticRate}  address={address} handle={userHandle}  />
+        <Route path='/user' element={<Account maticRate={maticRate}  address={address} handle={userHandle} balanceInr={balanceInr}  balance={balance} />}/>
+        <Route path='/Wallet' element={<Wallet maticRate={maticRate} address={address} handle={userHandle}  balanceInr={balanceInr} balance={balance}/>}/>
+        </>}
       </Routes>
+      
     </div>
   )
 }

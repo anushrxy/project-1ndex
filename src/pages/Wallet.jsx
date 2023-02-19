@@ -1,10 +1,10 @@
 import React from 'react'
 import WalletComponent from '../components/Wallet.component'
 
-function Wallet({address, handle}) {
+function Wallet({address, handle,balance,balanceInr}) {
   return (
     <>
-        <WalletComponent address={address} handle={handle} />
+        <WalletComponent address={address} balanceInr={balanceInr} balance={balance} handle={handle} />
     </>
   )
 }
