@@ -36,7 +36,7 @@ const CreateHandle = () => {
     const contract = new ethers.Contract(addressUserHandle,abiUserHandles,signer);
     const claimAddress = await contract.addHandle(value);
     (claimAddress) ? setAvailable("claimed") : console.log("Issue with Claim Handle.")
-     
+  
   }
 
   const handleButtonClick = async()=>{

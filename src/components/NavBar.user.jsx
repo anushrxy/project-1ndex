@@ -5,7 +5,7 @@ import "../App.css";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Nav = ({address}) => {
+const Nav = ({address, handle}) => {
   let Links = [
     { name: "Wallet", link: "/Wallet" },
     { name: "Gullak", link: "/gullak" },
@@ -13,6 +13,7 @@ const Nav = ({address}) => {
     { name: "Account", link: "/user" },
   ];
   let [open, setOpen] = useState(false);
+  
   return (
     <div className="shadow-md w-auto top-0 left-0 relative z-[10]">
       <div className="flex items-center justify-between px-10 h-[96px] shadow-nav">
@@ -62,7 +63,7 @@ const Nav = ({address}) => {
             </li>
             </Link>
           ))}
-          <Link to='/login' className="btn btn-accent btn-outline text-white btn-lg lg:ml-[8px] ml-0" onClick={()=>{ navigator.clipboard.writeText(address);}}>{address} <span className="ml-4 text-white"><BiClipboard/></span></Link>
+          <Link to='/login' className="btn btn-accent btn-outline text-white btn-lg lg:ml-[8px] ml-0" onClick={()=>{ navigator.clipboard.writeText(address);}}>{handle || address} <span className="ml-4 text-white"><BiClipboard/></span></Link>
         </ul>
       </div>
     </div>
