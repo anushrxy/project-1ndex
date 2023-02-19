@@ -8,7 +8,7 @@ import { db, app } from '../../firebaseconfig'
 import CreateHandle from '../components/CreateHandle';
 
 
-const Login = ({address}) => {
+const Login = ({address, handle}) => {
   const auth = useAuth();
 
   const onLogin = async () => {
@@ -73,14 +73,12 @@ const Login = ({address}) => {
 
   }  
 
-
   useEffect(() => {
-
-  if(true || addressdoesntexist){
-    // setHandleExists(true)
-  }
-
-  }, [address])
+    if(handle.length){
+      setHandleExists(true);
+    }
+  
+  }, [handle])
   
 
 

@@ -63,7 +63,6 @@ const fetchCurrentRate=async()=>{
    
    let response = await axios.request(reqOptions);
    setMaticRate(await response.data.rate);
-   console.log(maticRate)
    
 }
 
@@ -88,13 +87,16 @@ const handle="rajwitheth";
       {address && <Nav address={address} handle={userHandle}/>}
       
       <Routes>
-        <Route path='/login' element={<Login address={address}/>} />
+        <Route path='/login' element={<Login address={address} handle={handle}/>} />
         <Route path='/' element={<Home/>} />
-        <Route path='/Gullak' element={<Gullak/>}/>
-        <Route path='/user' element={<Account/>}/>
-        <Route path='/Wallet' element={<Wallet/>}/>
         <Route path='/*' element={<NotFound/>}/>
+        {address && <>
+        <Route path='/Gullak' element={<Gullak/>} maticRate={maticRate} />
+        <Route path='/user' element={<Account maticRate={maticRate} />}/>
+        <Route path='/Wallet' element={<Wallet maticRate={maticRate}/>}/>
+        </>}
       </Routes>
+      
     </div>
   )
 }

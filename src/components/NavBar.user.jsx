@@ -1,11 +1,14 @@
 import { RiHandCoinLine } from "react-icons/ri";
 import {BiClipboard} from "react-icons/bi"
 import "../App.css";
+import { useNavigate } from "react-router-dom";
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Nav = ({address, handle}) => {
+
+
   let Links = [
     { name: "Wallet", link: "/Wallet" },
     { name: "Gullak", link: "/gullak" },
@@ -62,7 +65,7 @@ const Nav = ({address, handle}) => {
             </li>
             </Link>
           ))}
-          <Link to='/login' className="btn btn-accent btn-outline text-white btn-lg lg:ml-[8px] ml-0" onClick={()=>{ navigator.clipboard.writeText(address);}}>{handle || address} <span className="ml-4 text-white"><BiClipboard/></span></Link>
+          <Link to={`${handle.length?"/user":"/login"}`} className="btn btn-accent btn-outline text-white btn-lg lg:ml-[8px] ml-0" onClick={()=>{ navigator.clipboard.writeText(address);}}>{handle || address} <span className="ml-4 text-white"><BiClipboard/></span></Link>
         </ul>
       </div>
     </div>
