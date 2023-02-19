@@ -96,7 +96,7 @@ const Login = ({address}) => {
         </p>
       ) : auth.isLoggedIn ? (
         <>
-         {handleExists && <> <p className="text-5xl btn btn-outline btn-accent rounded-lg py-5 my-5 w-fit block h-fit mx-auto ">
+         {/* {handleExists && <> <p className="text-5xl btn btn-outline btn-accent rounded-lg py-5 my-5 w-fit block h-fit mx-auto ">
             Logged In
           </p>
           <button className="btn btn-outline btn-accent rounded-lg py-5 my-5 w-fit block h-fit mx-auto " onClick={signTxn}>
@@ -104,7 +104,7 @@ const Login = ({address}) => {
           </button>
           <button className="btn btn-outline btn-accent rounded-lg py-5 my-5 w-fit block h-fit mx-auto " onClick={logOut}>
             Logout
-          </button></>}
+          </button></>} */}
 
           <div className="">
       {!handleExists && <CreateHandle></CreateHandle>}
