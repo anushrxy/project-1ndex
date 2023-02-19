@@ -21,6 +21,15 @@ const Alert = ({ from, amount, id , account,getData}) => {
           });
         getData();
     };
+    const acceptRequest = async() => { 
+        console.log("reject request run");
+        const docRef= doc(db,`handles/${account}/alerts/${id}`);
+        await updateDoc(docRef, {
+            status : 'accepted'
+          });
+        getData();
+    };
+
 
     return (
         <div className="alert shadow-lg">
@@ -47,17 +56,17 @@ const Alert = ({ from, amount, id , account,getData}) => {
                 <button className="btn btn-sm btn-ghost" onClick={rejectRequest}>
                     Reject Request
                 </button>
-                <button className="btn btn-sm btn-accent">Send {amount} Matic</button>
+                <button className="btn btn-sm btn-accent" onClick={acceptRequest}>Send {amount} Matic</button>
             </div>
         </div>
     );
 };
 
-const Account = () => {
+const Account = ({maticRate}) => {
     const account = "@rajwithmatic";
     const address = "0xabs123456789012345678901234567890";
     const balance = "6969";
-    const balanceInr = "69k";
+    const balanceInr = balance*Math.round((maticRate*100))/100;
     const [alertsData, setAlertsData] = useState();
 
 
@@ -79,6 +88,7 @@ const Account = () => {
     };
 
     useEffect(() => {
+        console.log(balanceInr)
         getData();
     }, []);
 
