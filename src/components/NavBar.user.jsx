@@ -1,7 +1,6 @@
 import { RiHandCoinLine } from "react-icons/ri";
 import {BiClipboard} from "react-icons/bi"
 import "../App.css";
-import { useNavigate } from "react-router-dom";
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";

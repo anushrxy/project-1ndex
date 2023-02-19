@@ -2,40 +2,47 @@ import React, { useState, useEffect } from "react";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebaseconfig";
 import "../App.css";
+import { async } from "@firebase/util";
+import { useAuth } from "@arcana/auth-react";
+import { ethers } from "ethers";
+import { abiUserHandles } from "../contract";
 
-function WalletComponent() {
-  const account = "anmol";
-  const address = "0xabs123456789012345678901234567890";
-  const balance = 6969;
+function WalletComponent({address, handle,balance, balanceInr}) {
   const [isHandle, setIsHandle] = useState("handle" || "address" || "ens");
   const [data, setData] = useState({ "to": '', "value": 0, "date": null });
   const initialState = "true";
   const [available, setAvailable] = useState(initialState);
 
+  const auth = useAuth();
 
   useEffect(() => {
+  
 
+    
+    
+    
     // querySelector = isHandle?"handle":"address";
     if (data.to.length < 3) {
 
       if (data.to.slice(0, 2) === "0x") {
         //isHandle false implies that an address is being input
         setIsHandle("address");
-
+        
       }
       else if (data.to.slice(0, 1) === "@") {
         setIsHandle("handle")
       }
       // else if (data.to.length == 0) {
-      //   setAvailable("unchecked")
-      // }
-      else {
-        //isHandle true imples that the input is handle
-        setIsHandle("ens");
+        //   setAvailable("unchecked")
+        // }
+        else {
+          //isHandle true imples that the input is handle
+          setIsHandle("ens");
+        }
       }
-    }
-
-  }, [data.to])
+      
+    }, [data.to])
+      
 
 
   const addRequest = async () => {
@@ -43,10 +50,10 @@ function WalletComponent() {
 
     try {
 
-      const alertsRef = collection(db, `handles/${data.to}/alerts`);
+      const alertsRef = collection(db, `handles/@${data.to}/alerts`);
       // const alertsRef = db.collection("handles").doc(user.handle).collection("alerts");
 
-      await setDoc(doc(alertsRef), { "date": new Date(), "from": account, "value": data.value, "status": "unread" });
+      await setDoc(doc(alertsRef), { "date": new Date(), "from": handle, "value": data.value, "status": "unread" });
       console.log("requestbuttonclicked");
       return(<h1>Request Sent</h1>)
     } catch (error) {
@@ -88,6 +95,37 @@ function WalletComponent() {
     }
   };
 
+  async function sendMatic() {
+    const arcanaProvider = await auth.connect();
+    const provider = new ethers.providers.Web3Provider(arcanaProvider);
+    const signer = provider.getSigner();
+    
+    if(isHandle=="address" || isHandle=="ens"){
+      const txn = {
+        to: data.to,
+        value: ethers.utils.parseEther(data.value)
+      }
+      const txnHash = await signer.sendTransaction(txn);
+      if(txnHash){
+        setData({ "to": '', "value": 0, "date": null });
+      }
+    }
+    if(isHandle=="handle"){
+      const contractAddress = "0x64AF05A9DaD9BbD9Dd580963E14e1e3b5825ffbC";
+      const contract = new ethers.Contract(contractAddress,abiUserHandles,signer)
+      const address = await contract.fetchAddress(data.to);
+      const txn = {
+        to: address,
+        value: ethers.utils.parseEther(data.value)
+      }
+      const txnHash = await signer.sendTransaction(txn);
+      if(txnHash){
+        setData({ "to": '', "value": 0, "date": null });
+      }
+    }
+    
+  }
+
   return (
     <div className="mt-[5px] mx-[20px] bg-inherit">
       <div className="flex justify-center items-center">
@@ -101,23 +139,23 @@ function WalletComponent() {
               />
               <div className='flex flex-col gap-10'>
                 <h1 className='text-primary sm:text-end text-center font-bold text-5xl md:text-6xl mb-5'>
-                  gm @{account}
+                  gm {handle}
                 </h1>
 
                 <p className='text-xl text-thin '>
                   address <span className='sm:inline-block block input input-disabled bg-base-300 p-x-5 py-2 sm:ml-5 my-2 sm:my-0 ml-0 cursor-default '>{address} </span>
                 </p>
-                <p className='text-xl text-thin '>
+                <div className='text-xl text-thin '>
                   Balance
                   <div className='sm:inline-block block my-2 md:my-0'>
                     <span className='input py-2 input-disabled bg-base-300 p-x-5 sm:ml-5 cursor-default'>{balance}
                       <span className='bg-secondary px-5 py-2  -mr-5 ml-2 rounded-r-lg'>MATIC </span>
                     </span>
-                    <span className='input py-2 input-disabled bg-base-300  p-x-5 sm:ml-5 cursor-default'>{balance}
+                    <span className='input py-2 input-disabled bg-base-300  p-x-5 sm:ml-5 cursor-default'>{balanceInr}
                       <span className=' bg-secondary px-5 py-2  -mr-5 ml-2 rounded-r-lg'>INR </span>
                     </span>
                   </div>
-                </p>
+                </div>
               </div>
             </div>
             <div className="bg-base-300 mt-3 w-full rounded-md">
@@ -145,7 +183,7 @@ function WalletComponent() {
                       type="text"
                       placeholder="@username"
                       className="input w-full text-base-300 font-normal border-t-0 border-x-0 border-b-[2px] border-base-300 outline-none rounded-none  text-xl disabled:bg-primary bg-primary placeholder:text-gray-500 placeholder:text-xl"
-                      value={account}
+                      value={handle}
                       // disabled={FromStatus}
                       disabled
                     />
@@ -178,7 +216,7 @@ function WalletComponent() {
                   </div>}
                 </div>
                 <button
-                  className={`${defaultBtnStatus} btn btn-outline border-[2px] border-base-300 mt-5 text-base-300 hover:bg-base-300 hover:text-primary hover:border-none`}
+                  className={`${defaultBtnStatus} btn btn-outline border-[2px] border-base-300 mt-5 text-base-300 hover:bg-base-300 hover:text-primary hover:border-none`} onClick={sendMatic}
                 >
                   Send Tokens
                 </button>

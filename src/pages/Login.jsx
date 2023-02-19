@@ -23,24 +23,9 @@ const Login = ({address, handle}) => {
     console.log(addressConnected[0]) 
 
 
-    //firebase query test
-    
 
-//     const q = query(handlesRef, where("address", "==", addressConnected[0]));
-
-// const querySnapshot = await getDocs(q);
-// querySnapshot.forEach((doc) => {
-//   // doc.data() is never undefined for query doc snapshots
-//   console.log(doc.id, " => ", doc.data());
-// });
-
-    return redirect("/");
   };
 
-
-  const logOut = async () => {
-    await auth.logout()
-  }
 
 
 
@@ -94,15 +79,7 @@ const Login = ({address, handle}) => {
         </p>
       ) : auth.isLoggedIn ? (
         <>
-         {/* {handleExists && <> <p className="text-5xl btn btn-outline btn-accent rounded-lg py-5 my-5 w-fit block h-fit mx-auto ">
-            Logged In
-          </p>
-          <button className="btn btn-outline btn-accent rounded-lg py-5 my-5 w-fit block h-fit mx-auto " onClick={signTxn}>
-            Sign Txn
-          </button>
-          <button className="btn btn-outline btn-accent rounded-lg py-5 my-5 w-fit block h-fit mx-auto " onClick={logOut}>
-            Logout
-          </button></>} */}
+         <You Already have a handle></You>
 
           <div className="">
       {!handleExists && <CreateHandle></CreateHandle>}
