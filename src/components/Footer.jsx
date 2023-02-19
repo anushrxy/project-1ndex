@@ -1,5 +1,5 @@
 import React from "react";
-import { RiHandCoinLine } from "react-icons/ri";
+import { FaEthereum } from "react-icons/fa";
 import {
   FaFacebookF,
   FaTwitter,
@@ -13,8 +13,8 @@ const Footer = () => {
       <div className="grid md:grid-cols-12 grid-cols-1">
         <div className="sm:col-span-4 font-bold text-3xl flex flex-col gap-y-[20px] md:mb-0 mb-[25px]">
           <div className="flex gap-x-[7px] items-center">
-            <RiHandCoinLine />
-            <p>AnyBunny</p>
+            <FaEthereum/>
+            <p>PayPol</p>
           </div>
           <div className="flex gap-x-[15px] text-lg">
             <FaFacebookF/>

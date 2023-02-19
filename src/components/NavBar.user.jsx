@@ -18,7 +18,7 @@ const Nav = ({address}) => {
       <div className="flex items-center justify-between px-10 h-[96px] shadow-nav">
         <Link to='/' className="cursor-pointer flex items-center text-2xl">
           <RiHandCoinLine alt="logo" className="h-[96px]" />
-          <p className="font-bold ml-[10px]">AnyMoney</p>
+          <p className="font-bold ml-[10px]">PayPol</p>
         </Link>
 
         <div
