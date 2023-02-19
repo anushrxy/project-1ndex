@@ -1,4 +1,4 @@
-export const abi = [
+export const abiUserHandles = [
 	{
 		"inputs": [
 			{
@@ -7,24 +7,12 @@ export const abi = [
 				"type": "string"
 			}
 		],
-		"name": "updateHandle",
+		"name": "addHandle",
 		"outputs": [
 			{
-				"components": [
-					{
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					},
-					{
-						"internalType": "string",
-						"name": "userHandle",
-						"type": "string"
-					}
-				],
-				"internalType": "struct appUserHandles.OwnerHandle",
+				"internalType": "string",
 				"name": "",
-				"type": "tuple"
+				"type": "string"
 			}
 		],
 		"stateMutability": "nonpayable",
@@ -33,12 +21,12 @@ export const abi = [
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "_checkAddress",
-				"type": "address"
+				"internalType": "string",
+				"name": "_checkHandle",
+				"type": "string"
 			}
 		],
-		"name": "checkAddress",
+		"name": "checkHandle",
 		"outputs": [
 			{
 				"internalType": "bool",
@@ -52,21 +40,29 @@ export const abi = [
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
+				"internalType": "string",
+				"name": "_handle",
+				"type": "string"
 			}
 		],
-		"name": "handles",
+		"name": "fetchAddress",
 		"outputs": [
 			{
 				"internalType": "address",
-				"name": "owner",
+				"name": "",
 				"type": "address"
-			},
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "fetchHandle",
+		"outputs": [
 			{
 				"internalType": "string",
-				"name": "userHandle",
+				"name": "",
 				"type": "string"
 			}
 		],
