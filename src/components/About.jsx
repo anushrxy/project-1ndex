@@ -13,6 +13,10 @@ const About = () => {
       desc:'Our application is integrated with Ethereum Name Service (ENS), which allows users to register domain names for their Ethereum addresses to simplify sending and recieving.'
     },
     {
+      name:'Gullak',
+      desc:'Gullak is our flagship feature that lets users store their tokens on contract away from their account. The users can break the gullak and redeem all the amount saved at once. This will help in both privacy and saving'
+    },
+    {
       name:'Sending Requests for Token',
       desc:'Users of our app can send out token requests to other users to recieve token from them.'
     },
@@ -20,6 +24,7 @@ const About = () => {
       name:'Address book',
       desc:'beta Our application allows users to create an address book of their contacts, which makes it easy to send tokens to people they frequently transact with.'
     },
+    
   ]
 
   return (
