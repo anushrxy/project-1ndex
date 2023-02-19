@@ -9,7 +9,6 @@ const Nav = ({address, handle}) => {
   let Links = [
     { name: "Wallet", link: "/Wallet" },
     { name: "Gullak", link: "/gullak" },
-    { name: "request", link: "/request" },
     { name: "Account", link: "/user" },
   ];
   let [open, setOpen] = useState(false);
@@ -18,8 +17,8 @@ const Nav = ({address, handle}) => {
     <div className="shadow-md w-auto top-0 left-0 relative z-[10]">
       <div className="flex items-center justify-between px-10 h-[96px] shadow-nav">
         <Link to='/' className="cursor-pointer flex items-center text-2xl">
-          <RiHandCoinLine alt="logo" className="h-[96px]" />
-          <p className="font-bold ml-[10px]">AnyMoney</p>
+        <img src="https://res.cloudinary.com/dmofs5r4h/image/upload/v1676812236/logo-02_puw7kb.png" className="h-[46px]"/>
+          <p className="font-bold ml-[5px]">PayPol</p>
         </Link>
 
         <div

@@ -201,11 +201,12 @@ function WalletComponent({address, handle}) {
                     <label className="label w-20">
                       <span className="label-text text-base-300">Their Address</span>
                     </label>
+                    {defaultTabStatus!=="tab-active" && <span className="bg-base-300 h-full text-white p-2 ml-2">@</span>}
                     <input
                       required
                       type="text"
                       placeholder="@username"
-                      className="input w-full text-base-300 font-normal bg-primary border-t-0 border-x-0 border-b-[2px] border-base-300 outline-none rounded-none placeholder:text-gray-500 placeholder:text-xl text-xl disabled:bg-primary"
+                      className="input w-full text-base-300 font-normal  bg-primary border-t-0 border-x-0 border-b-[2px] border-base-300 outline-none rounded-none placeholder:text-gray-500 placeholder:text-xl text-xl disabled:bg-primary"
                       value={data.to} onChange={(e) => { setData({ ...data, to: e.target.value }) }}
                     // disabled={ToStatus}
                     />

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import NavBarFirst from "../src/components/NavBar.first"
-import SendRequest from './components/SendRequest'
 import { Routes, Route } from 'react-router-dom';
-import { Home, Login, Gullak,Account,Wallet } from './pages';
+import { Home, Login, Gullak,Account,Wallet, NotFound } from './pages';
 import { useAuth } from '@arcana/auth-react';
 import { ethers } from 'ethers';
 import Nav from './components/NavBar.user';
@@ -93,8 +92,8 @@ const handle="rajwitheth";
         <Route path='/' element={<Home/>} />
         <Route path='/Gullak' element={<Gullak/>}/>
         <Route path='/user' element={<Account/>}/>
-        <Route path='/request' element={<SendRequest address={address} handle={userHandle} />}></Route>
         <Route path='/Wallet' element={<Wallet address={address} handle={userHandle}/>}/>
+        <Route path='/*' element={<NotFound/>}/>
       </Routes>
     </div>
   )
