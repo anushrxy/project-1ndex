@@ -1,4 +1,5 @@
 import { RiHandCoinLine } from "react-icons/ri";
+import {BiClipboard} from "react-icons/bi"
 import "../App.css";
 
 import React, { useState } from "react";
@@ -14,7 +15,7 @@ const Nav = ({address}) => {
   let [open, setOpen] = useState(false);
   return (
     <div className="shadow-md w-auto top-0 left-0 relative z-[10]">
-      <div className="flex items-center justify-between bg-neutral px-10 h-[96px] shadow-nav">
+      <div className="flex items-center justify-between px-10 h-[96px] shadow-nav">
         <Link to='/' className="cursor-pointer flex items-center text-2xl">
           <RiHandCoinLine alt="logo" className="h-[96px]" />
           <p className="font-bold ml-[10px]">AnyMoney</p>
@@ -61,7 +62,7 @@ const Nav = ({address}) => {
             </li>
             </Link>
           ))}
-          <Link to='/login' className="btn btn-accent btn-outline text-white btn-lg lg:ml-[8px] ml-0">{address}</Link>
+          <Link to='/login' className="btn btn-accent btn-outline text-white btn-lg lg:ml-[8px] ml-0" onClick={()=>{ navigator.clipboard.writeText(address);}}>{address} <span className="ml-4 text-white"><BiClipboard/></span></Link>
         </ul>
       </div>
     </div>

@@ -6,6 +6,8 @@
   /* Track */
   ::-webkit-scrollbar-track {
     background: #252525;
+    border-radius: 100px;
+
   }
   
   /* Handle */

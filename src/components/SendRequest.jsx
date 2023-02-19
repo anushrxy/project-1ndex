@@ -7,7 +7,7 @@ import { collection, query, where, getDocs, doc, setDoc   } from "firebase/fires
 
 
 const SendRequest = ({address, handle}) => {
-  const [isHandle, setIsHandle] = useState(true);
+  const [isHandle, setIsHandle] = useState("handle"||"address"||"ens");
   const [data, setData] = useState({"to":'',"value":0,"date":null});
   const initialState="true";
 
@@ -26,12 +26,15 @@ const SendRequest = ({address, handle}) => {
 
       if (data.to.slice(0, 2) === "0x") {
         //isHandle false implies that an address is being input
-        setIsHandle(false);
+        setIsHandle("address");
 
+      }
+      else if(data.to.slice(0,1)==="@"){
+        setIsHandle("handle")
       }
       else {
         //isHandle true imples that the input is handle
-        setIsHandle(true);
+        setIsHandle("ens");
       }
     }
 
